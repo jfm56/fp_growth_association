@@ -38,12 +38,12 @@ The following features are most correlated with diagnosis (absolute Pearson corr
   ```sh
   python3 src/main.py print_2itemsets PROJECT2_DATASET.csv diagnosis
   ```
-- **Run Logistic Regression (predicting M):**
+- **Run Decision Tree (predicting M):**
   ```sh
-  python3 src/main.py logreg PROJECT2_DATASET.csv diagnosis
+  python3 src/main.py decision_tree PROJECT2_DATASET.csv diagnosis
   ```
   - Uses only the top 10 features most correlated with diagnosis, binned at the median (0=low, 1=high).
-  - Reports accuracy, precision, recall, F1, and feature coefficients for predicting malignant (M).
+  - Reports accuracy, precision, recall, F1, tree depth, and a text visualization of the tree for predicting malignant (M).
 
 ### Recommendations
 - For more meaningful multi-itemsets, consider alternative binning, feature engineering, or focus on categorical features.

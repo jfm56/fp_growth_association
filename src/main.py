@@ -2,10 +2,10 @@ import sys
 from src.csv_loader import CSVLoader
 
 if __name__ == "__main__":
-    if len(sys.argv) >= 2 and sys.argv[1] == "logreg":
+    if len(sys.argv) >= 2 and sys.argv[1] == "decision_tree":
         import pandas as pd
         from sklearn.model_selection import train_test_split
-        from sklearn.linear_model import LogisticRegression
+        from sklearn.tree import DecisionTreeClassifier, export_text
         from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, classification_report
         csv_path = sys.argv[2] if len(sys.argv) > 2 else "PROJECT2_DATASET.csv"
         diagnosis_col = sys.argv[3] if len(sys.argv) > 3 else "diagnosis"
@@ -26,19 +26,19 @@ if __name__ == "__main__":
         X = X[valid]
         y = y[valid]
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
-        model = LogisticRegression(max_iter=1000, solver='liblinear')
-        model.fit(X_train, y_train)
-        y_pred = model.predict(X_test)
-        print("\nLogistic Regression Results (Predicting diagnosis=M):")
+        tree = DecisionTreeClassifier(max_depth=4, random_state=42)
+        tree.fit(X_train, y_train)
+        y_pred = tree.predict(X_test)
+        print("\nDecision Tree Results (Predicting diagnosis=M):")
         print(f"Accuracy:  {accuracy_score(y_test, y_pred):.4f}")
         print(f"Precision: {precision_score(y_test, y_pred):.4f}")
         print(f"Recall:    {recall_score(y_test, y_pred):.4f}")
         print(f"F1 Score:  {f1_score(y_test, y_pred):.4f}")
         print("\nClassification Report:")
         print(classification_report(y_test, y_pred, target_names=['B', 'M']))
-        print("\nFeature Coefficients:")
-        for col, coef in zip(feature_cols, model.coef_[0]):
-            print(f"{col:25s}: {coef:+.4f}")
+        print(f"\nTree Depth: {tree.get_depth()}")
+        print("\nTree Structure (text):")
+        print(export_text(tree, feature_names=list(X.columns)))
         sys.exit(0)
 
     if len(sys.argv) >= 2 and sys.argv[1] == "print_2itemsets":
