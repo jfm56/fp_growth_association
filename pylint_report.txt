@@ -1,0 +1,49 @@
+************* Module src
+src/__init__.py:1:0: C0305: Trailing newlines (trailing-newlines)
+************* Module src.fp_tree
+src/fp_tree.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+src/fp_tree.py:4:0: C0115: Missing class docstring (missing-class-docstring)
+src/fp_tree.py:12:4: C0116: Missing function or method docstring (missing-function-docstring)
+src/fp_tree.py:4:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+src/fp_tree.py:19:0: C0115: Missing class docstring (missing-class-docstring)
+src/fp_tree.py:24:4: C0116: Missing function or method docstring (missing-function-docstring)
+src/fp_tree.py:36:4: C0116: Missing function or method docstring (missing-function-docstring)
+src/fp_tree.py:37:8: C0415: Import outside toplevel (graphviz.Digraph) (import-outside-toplevel)
+src/fp_tree.py:1:0: W0611: Unused defaultdict imported from collections (unused-import)
+************* Module src.association_rules
+src/association_rules.py:5:0: C0301: Line too long (119/100) (line-too-long)
+src/association_rules.py:9:0: C0301: Line too long (102/100) (line-too-long)
+src/association_rules.py:28:0: C0301: Line too long (107/100) (line-too-long)
+src/association_rules.py:29:0: C0301: Line too long (147/100) (line-too-long)
+src/association_rules.py:46:0: C0301: Line too long (102/100) (line-too-long)
+src/association_rules.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+src/association_rules.py:4:0: C0115: Missing class docstring (missing-class-docstring)
+src/association_rules.py:10:34: R1728: Consider using a generator instead 'sum(support for (_, support) in freq_itemsets if len(_) == 1)' (consider-using-generator)
+src/association_rules.py:12:4: C0116: Missing function or method docstring (missing-function-docstring)
+src/association_rules.py:41:4: C0116: Missing function or method docstring (missing-function-docstring)
+src/association_rules.py:46:4: C0116: Missing function or method docstring (missing-function-docstring)
+src/association_rules.py:50:4: C0116: Missing function or method docstring (missing-function-docstring)
+************* Module src.csv_loader
+src/csv_loader.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+src/csv_loader.py:4:0: C0115: Missing class docstring (missing-class-docstring)
+src/csv_loader.py:8:4: C0116: Missing function or method docstring (missing-function-docstring)
+src/csv_loader.py:4:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+src/csv_loader.py:2:0: C0411: standard import "typing.List" should be placed before third party import "pandas" (wrong-import-order)
+************* Module src.fp_growth
+src/fp_growth.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+src/fp_growth.py:5:0: C0115: Missing class docstring (missing-class-docstring)
+src/fp_growth.py:10:4: C0116: Missing function or method docstring (missing-function-docstring)
+src/fp_growth.py:32:53: W0613: Unused argument 'item_counts' (unused-argument)
+src/fp_growth.py:43:4: C0116: Missing function or method docstring (missing-function-docstring)
+src/fp_growth.py:30:8: W0201: Attribute 'tree' defined outside __init__ (attribute-defined-outside-init)
+************* Module src.main
+src/main.py:8:0: C0301: Line too long (122/100) (line-too-long)
+src/main.py:35:0: C0301: Line too long (183/100) (line-too-long)
+src/main.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+src/main.py:2:0: E0401: Unable to import 'csv_loader' (import-error)
+src/main.py:3:0: E0401: Unable to import 'fp_growth' (import-error)
+src/main.py:4:0: E0401: Unable to import 'association_rules' (import-error)
+
+------------------------------------------------------------------
+Your code has been rated at 6.87/10 (previous run: 6.87/10, +0.00)
+

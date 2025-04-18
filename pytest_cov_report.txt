@@ -1,0 +1,58 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.11.8, pytest-8.3.5, pluggy-1.5.0
+rootdir: /Users/jimmullen/CascadeProjects/fp_growth_association
+configfile: pytest.ini
+testpaths: tests
+plugins: cov-6.1.1
+collected 3 items
+
+tests/test_csv_loader.py F                                               [ 33%]
+tests/test_fp_growth.py 
+
+=================================== FAILURES ===================================
+_______________________________ test_csv_loader ________________________________
+
+    def test_csv_loader():
+        df = pd.DataFrame([
+            ['a', 'b', 'c'],
+            ['a', 'b', None],
+            ['b', 'c', None]
+        ])
+        with tempfile.NamedTemporaryFile(suffix='.csv', mode='w+', delete=False) as f:
+            df.to_csv(f.name, header=False, index=False)
+            loader = CSVLoader(f.name)
+            transactions = loader.load_transactions()
+>           assert transactions == [['a', 'b', 'c'], ['a', 'b'], ['b', 'c']]
+E           AssertionError: assert [['a=a', 'b=b...'a=b', 'b=c']] == [['a', 'b', '...], ['b', 'c']]
+E             
+E             At index 0 diff: ['a=a', 'b=b'] != ['a', 'b', 'c']
+E             Right contains one more item: ['b', 'c']
+E             Use -v to get more diff
+
+tests/test_csv_loader.py:15: AssertionError
+=============================== warnings summary ===============================
+venv/lib/python3.11/site-packages/_pytest/config/__init__.py:1441
+  /Users/jimmullen/CascadeProjects/fp_growth_association/venv/lib/python3.11/site-packages/_pytest/config/__init__.py:1441: PytestConfigWarning: Unknown config option: python_paths
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+================================ tests coverage ================================
+_______________ coverage: platform darwin, python 3.11.8-final-0 _______________
+
+Name                       Stmts   Miss  Cover
+----------------------------------------------
+src/__init__.py                0      0   100%
+src/association_rules.py      40     40     0%
+src/csv_loader.py             19      1    95%
+src/fp_growth.py              35     11    69%
+src/fp_tree.py                41     12    71%
+src/main.py                   31     31     0%
+----------------------------------------------
+TOTAL                        166     95    43%
+=========================== short test summary info ============================
+FAILED tests/test_csv_loader.py::test_csv_loader - AssertionError: assert [['...
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! KeyboardInterrupt !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+/Users/jimmullen/CascadeProjects/fp_growth_association/src/fp_tree.py:32: KeyboardInterrupt
+(to show a full traceback on KeyboardInterrupt use --full-trace)
+=================== 1 failed, 1 warning in 86.15s (0:01:26) ====================
