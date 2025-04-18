@@ -1,9 +1,46 @@
 import sys
 from src.csv_loader import CSVLoader
-from src.fp_growth import FPGrowth
-from src.association_rules import AssociationRuleMiner
 
 if __name__ == "__main__":
+    if len(sys.argv) >= 2 and sys.argv[1] == "logreg":
+        import pandas as pd
+        from sklearn.model_selection import train_test_split
+        from sklearn.linear_model import LogisticRegression
+        from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, classification_report
+        csv_path = sys.argv[2] if len(sys.argv) > 2 else "PROJECT2_DATASET.csv"
+        diagnosis_col = sys.argv[3] if len(sys.argv) > 3 else "diagnosis"
+        # Load and preprocess data
+        df = pd.read_csv(csv_path)
+        top_features = [
+            'concave points_worst', 'perimeter_worst', 'concave points_mean', 'radius_worst',
+            'perimeter_mean', 'area_worst', 'radius_mean', 'area_mean', 'concavity_mean', 'concavity_worst'
+        ]
+        feature_cols = [col for col in df.columns if col in top_features]
+        # Median binning
+        for col in feature_cols:
+            df[col] = pd.qcut(df[col], q=2, labels=[0,1], duplicates='drop')
+        X = df[feature_cols].astype(int)
+        y = df[diagnosis_col].map({'B': 0, 'M': 1})
+        # Drop rows with missing
+        valid = ~X.isnull().any(axis=1) & ~y.isnull()
+        X = X[valid]
+        y = y[valid]
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
+        model = LogisticRegression(max_iter=1000, solver='liblinear')
+        model.fit(X_train, y_train)
+        y_pred = model.predict(X_test)
+        print("\nLogistic Regression Results (Predicting diagnosis=M):")
+        print(f"Accuracy:  {accuracy_score(y_test, y_pred):.4f}")
+        print(f"Precision: {precision_score(y_test, y_pred):.4f}")
+        print(f"Recall:    {recall_score(y_test, y_pred):.4f}")
+        print(f"F1 Score:  {f1_score(y_test, y_pred):.4f}")
+        print("\nClassification Report:")
+        print(classification_report(y_test, y_pred, target_names=['B', 'M']))
+        print("\nFeature Coefficients:")
+        for col, coef in zip(feature_cols, model.coef_[0]):
+            print(f"{col:25s}: {coef:+.4f}")
+        sys.exit(0)
+
     if len(sys.argv) >= 2 and sys.argv[1] == "print_2itemsets":
         from itertools import combinations
         from collections import Counter

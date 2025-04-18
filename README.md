@@ -38,11 +38,12 @@ The following features are most correlated with diagnosis (absolute Pearson corr
   ```sh
   python3 src/main.py print_2itemsets PROJECT2_DATASET.csv diagnosis
   ```
-- **Run FP-Growth:**
+- **Run Logistic Regression (predicting M):**
   ```sh
-  python3 src/main.py PROJECT2_DATASET.csv diagnosis <min_support>
+  python3 src/main.py logreg PROJECT2_DATASET.csv diagnosis
   ```
-  (Replace `<min_support>` with a number, e.g., `0.01` for 1% support)
+  - Uses only the top 10 features most correlated with diagnosis, binned at the median (0=low, 1=high).
+  - Reports accuracy, precision, recall, F1, and feature coefficients for predicting malignant (M).
 
 ### Recommendations
 - For more meaningful multi-itemsets, consider alternative binning, feature engineering, or focus on categorical features.
